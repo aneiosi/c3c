@@ -18,7 +18,7 @@ The C3 language is essentially the language specification. You can contribute to
 
 ## 2. How to contribute to the C3 compiler
 
-The C3 compiler consists for the compiler itself + test suites for testing the compiler. 
+The C3 compiler consists for the compiler itself + test suites for testing the compiler.
 You can contribute by:
 
 1. File bugs (by far the most important thing).
@@ -44,7 +44,8 @@ You can contribute by:
 If there is just a matter of adding a function or two to an existing module, a pull request
 is sufficient. However, please make sure that:
 
-1. It follows the guidelines for the code to ensure a uniform experience (naming standard, indentation, braces etc).
+1. It follows the guidelines for the code to ensure a uniform experience (naming standard,
+   indentation, braces etc).
 2. Add a line in the release notes about the change.
 3. Make sure it has unit tests.
 
@@ -52,7 +53,8 @@ is sufficient. However, please make sure that:
 
 Regardless whether an addition is approved for inclusion or not, it needs to incubate:
 
-1. First implement it standalone, showing that it’s working well and has a solid design. This has the advantage of people being able to contribute or even create competing implementations
+1. First implement it standalone, showing that it’s working well and has a solid design. This has
+   the advantage of people being able to contribute or even create competing implementations
 2. Once it is considered finished it can be proposed for inclusion.
 
 This will greatly help improving the quality of additions.

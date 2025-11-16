@@ -4,7 +4,8 @@
 - Imgui library
 - Job queue
 - TOML serialization and deserialization
-- Classic games: Tetris, Asteroids, Snake, Space Invaders, Pac Man, Defender, Frogger, Donkey Kong, Surround, Breakout, Galaxian, Centipede, Pole Position, Lunar Lander, Q*bert!, Dig Dug.   
+- Classic games: Tetris, Asteroids, Snake, Space Invaders, Pac Man, Defender, Frogger, Donkey Kong,
+  Surround, Breakout, Galaxian, Centipede, Pole Position, Lunar Lander, Q*bert!, Dig Dug.
 - Protobuf library
 - MySQL bindings
 - Postgres bindings

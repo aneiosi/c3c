@@ -11,7 +11,7 @@ __wrap__() {
     BIN_DIR="$C3_HOME"
     # C3 compiler repository URL
     REPO="c3lang/c3c"
-    REPOURL="${C3_REPOURL:-https://github.com/$REPO}"
+    REPO_URL="${C3_REPO_URL:-https://github.com/$REPO}"
 
     detect_platform() {
         # Detects the operating system
@@ -44,9 +44,9 @@ __wrap__() {
 
     # Determine the download URL (latest release or specific version)
     if [[ "$VERSION" == "latest" ]]; then
-        URL="${REPOURL%/}/releases/latest/download/${BINARY}${EXT}"
+        URL="${REPO_URL%/}/releases/latest/download/${BINARY}${EXT}"
     else
-        URL="${REPOURL%/}/releases/download/v${VERSION#v}/${BINARY}${EXT}"
+        URL="${REPO_URL%/}/releases/download/v${VERSION#v}/${BINARY}${EXT}"
     fi
 
     # Temporary file for the downloaded archive
