@@ -325,7 +325,7 @@ yay -S c3c-git
 Or clone it manually:
 
 ```sh
-git clone https://aur.archlinux.org/c3c-git.git
+git clone --depth=1 https://aur.archlinux.org/c3c-git.git
 cd c3c-git
 makepkg -si
 ```
@@ -439,7 +439,7 @@ called `hello_world` or `hello_world.exe`depending on platform.
    Visual Studio" (<https://aka.ms/vs/17/release/vs_BuildTools.exe>) and then select "Desktop
    development with C++"
 2. Install CMake
-3. Clone the C3C github repository: `git clone https://github.com/c3lang/c3c.git`
+3. Clone the C3C github repository: `git clone --depth=1 https://github.com/c3lang/c3c.git`
 4. Enter the C3C directory: `cd c3c`.
 5. Set up the CMake build: `cmake --preset windows-vs-2022-release`
 6. Build: `cmake --build --preset windows-vs-2022-release`
@@ -488,9 +488,9 @@ You should now have a `c3c` executable in `build-debug\Debug`.
 
     If you're using Ubuntu 25.04, also install `libpolly-20-dev`.
 
-3. Clone the C3C github repository: `git clone https://github.com/c3lang/c3c.git`
+3. Clone the C3C github repository: `git clone --depth=1 https://github.com/c3lang/c3c.git`
 4. Enter the C3C directory `cd c3c`.
-5. Set up CMake build: `cmake -B build -S .`
+5. Set up CMake build: `cmake -B=build --install-prefix=$HOME/.local`
 6. Build: `cmake --build build`
 7. Change directory to the build directory `cd build`
 
@@ -516,9 +516,14 @@ You can try it out by running some sample code: `./c3c compile ../resources/exam
         zlib-devel
     ```
 
-2. Clone the C3C repository: `git clone --depth=1 https://github.com/c3lang/c3c.git`
+2. Clone the C3C repository:
+
+    ```sh
+    git clone --depth=1 https://github.com/c3lang/c3c.git
+    ```
+
 3. Enter the directory: `cd c3c`
-4. Create the CMake build cache: `cmake -B build -S .`
+4. Create the CMake build cache: `cmake -B=build --install-prefix=$HOME/.local`
 5. Build: `cmake --build build`
 6. Enter the build directory: `cd build`
 
@@ -527,16 +532,19 @@ For a system-wide installation, run the following as root: `cmake --install .`
 
 #### Compiling on Fedora
 
-1. Install required project dependencies: `dnf install cmake clang git llvm llvm-devel lld lld-devel ncurses-devel`
-2. Optionally, install additional dependencies: `dnf install libcurl-devel zlib-devel libzstd-devel libxml2-devel libffi-devel`
-3. Clone the C3C repository: `git clone https://github.com/c3lang/c3c.git`
-    - If you only need the latest commit, you may want to make a shallow clone: `git clone https://github.com/c3lang/c3c.git --depth=1`
+1. Install required project dependencies: `dnf install cmake clang git llvm llvm-devel lld
+   lld-devel ncurses-devel`
+2. Optionally, install additional dependencies: `dnf install libcurl-devel zlib-devel libzstd-devel
+   libxml2-devel libffi-devel`
+3. Clone the C3C repository: `git clone --depth=1 https://github.com/c3lang/c3c.git`
 4. Enter the C3C directory: `cd c3c`
-5. Create the CMake build cache. The Fedora repositories provide `.so` libraries for lld, so you need to set the C3_LINK_DYNAMIC flag: `cmake -B build -S . -DC3_LINK_DYNAMIC=1`
+5. Create the CMake build cache. The Fedora repositories provide `.so` libraries for lld, so you
+   need to set the C3_LINK_DYNAMIC flag: `cmake -B=build --install-prefix=$HOME/.local -DC3_LINK_DYNAMIC=1`
 6. Build the project: `cmake --build build`
 7. Enter the build directory: `cd build`
 
-The c3c binary should be created in the build directory. You can try it out by running some sample code: `./c3c compile ../resources/examples/hash.c3`
+The c3c binary should be created in the build directory. You can try it out by running some sample
+code: `./c3c compile ../resources/examples/hash.c3`
 
 #### Compiling on Arch Linux
 
@@ -555,14 +563,13 @@ The c3c binary should be created in the build directory. You can try it out by r
         llvm-libs
     ```
 
-2. Clone the C3C repository: `git clone https://github.com/c3lang/c3c.git`
-    - If you only need the latest commit, you may want to make a shallow clone: `git clone https://github.com/c3lang/c3c.git --depth=1`
+2. Clone the C3C repository: `git clone --depth=1 https://github.com/c3lang/c3c.git`
 3. Enter the C3C directory: `cd c3c`
 4. Create the CMake build cache:
 
     ```sh
-    cmake -B build \
-        --install-prefix $HOME/.local \
+    cmake -B=build \
+        --install-prefix=$HOME/.local \
         -DC3_LINK_DYNAMIC=ON \
         -DCMAKE_BUILD_TYPE=Release
     ```
@@ -576,10 +583,12 @@ The c3c binary should be created in the build directory. You can try it out by r
 #### Compiling on NixOS
 
 1. Enter nix shell, by typing `nix develop` in root directory
-2. Configure cmake via `cmake . -Bbuild $=C3_CMAKE_FLAGS`. Note: passing `C3_CMAKE_FLAGS` is needed in due to generate `compile_commands.json` and find missing libs.
-4. Build it `cmake --build build`
-5. Test it out: `./build/c3c -V`
-6. If you use `clangd` lsp server for your editor, it is recommended to make a symbolic link to `compile_command.json` in the root: `ln -s ./build/compile_commands.json compile_commands.json`
+2. Configure cmake via `cmake . -Bbuild $=C3_CMAKE_FLAGS`. Note: passing `C3_CMAKE_FLAGS` is needed
+   in due to generate `compile_commands.json` and find missing libs.
+3. Build it `cmake --build build`
+4. Test it out: `./build/c3c -V`
+5. If you use `clangd` lsp server for your editor, it is recommended to make a symbolic link to
+   `compile_command.json` in the root: `ln -s ./build/compile_commands.json compile_commands.json`
 
 #### Compiling on OS X using Homebrew
 
@@ -587,9 +596,9 @@ The c3c binary should be created in the build directory. You can try it out by r
 2. Install LLVM 17+: `brew install llvm`
 3. Install lld: `brew install lld`
 4. Install CMake: `brew install cmake`
-5. Clone the C3C github repository: `git clone https://github.com/c3lang/c3c.git`
+5. Clone the C3C github repository: `git clone --depth=1 https://github.com/c3lang/c3c.git`
 6. Enter the C3C directory `cd c3c`.
-7. Set up CMake build for debug: `cmake -B build -S .`
+7. Set up CMake build for debug: `cmake -B=build --install-prefix=$HOME/.local`
 8. Build: `cmake --build build`
 9. Change directory to the build directory `cd build`
 
@@ -597,10 +606,11 @@ The c3c binary should be created in the build directory. You can try it out by r
 
 1. Install CMake.
 2. Install or compile LLVM and LLD libraries (version 17+ or higher)
-3. Clone the C3C github repository: `git clone https://github.com/c3lang/c3c.git`
+3. Clone the C3C github repository: `git clone --depth=1 https://github.com/c3lang/c3c.git`
 4. Enter the C3C directory `cd c3c`.
-5. Set up CMake build for debug: `cmake -B build -S .`. At this point you may need to manually
-   provide the link path to the LLVM CMake directories, e.g. `cmake -B build -S . -DLLVM_DIR=/usr/local/opt/llvm/lib/cmake/llvm/`
+5. Set up CMake build for debug: `cmake -B=build --install-prefix=$HOME/.local`. At this point you
+   may need to manually provide the link path to the LLVM CMake directories, e.g. `cmake -B=build
+   --install-prefix=$HOME/.local -DLLVM_DIR=/usr/local/opt/llvm/lib/cmake/llvm/`
 6. Build: `cmake --build build`
 7. Change directory to the build directory `cd build`
 
