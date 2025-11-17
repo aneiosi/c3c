@@ -189,9 +189,9 @@ The compiler is currently verified to compile on Linux, OpenBSD, Windows and Mac
 | Wasm64             | No           | Untested  | No          | No       | No       | No         |
 
 _+ Also supports cross-compilation_<br>
-_* Inline asm is still a work in progress_<br>
-_* OpenBSD 7.7 is the only tested version_<br>
-_* OpenBSD has limited stacktrace, needs to be tested further_
+_\* Inline asm is still a work in progress_<br>
+_\* OpenBSD 7.7 is the only tested version_<br>
+_\* OpenBSD has limited stacktrace, needs to be tested further_
 
 More platforms will be supported in the future.
 
@@ -289,7 +289,7 @@ curl -fsSL https://raw.githubusercontent.com/c3lang/c3c/refs/heads/master/instal
 3. Unzip executable and standard lib.
 4. Run `./c3c`.
 
-_*Note: there is a known issue with debug symbol generation on MacOS 13, see
+_\*Note: there is a known issue with debug symbol generation on MacOS 13, see
 [issue #1086](https://github.com/c3lang/c3c/issues/1086)_
 
 #### Installing on OpenBSD with precompiled binaries
@@ -299,7 +299,7 @@ _*Note: there is a known issue with debug symbol generation on MacOS 13, see
 2. Unpack executable and standard lib.
 3. Run `./c3c`.
 
-_\*Note: this is specifically for OpenBSD 7.7, running it on any other version is prone to ABI breaks_
+_\*Note: this is specifically for OpenBSD 7.7 and running it on any other version is prone to ABI breaks_
 
 #### Installing on Arch Linux
 
@@ -384,7 +384,7 @@ sudo emerge -av dev-lang/c3c
 - The compiler binary is installed to `/usr/bin/c3c`.
 - The standard library is installed to `/usr/lib/c3`.
 
-_*Note: for Gentoo-specific issues, please use the [Gentoo Bugzilla](https://bugs.gentoo.org/) (Product: GURU)_
+_\*Note: for Gentoo-specific issues, please use the [Gentoo Bugzilla](https://bugs.gentoo.org/) (Product: GURU)_
 
 #### Building via Docker
 
@@ -451,7 +451,7 @@ You can try it out by running some sample code: `c3c.exe compile ../../resources
 Building `c3c` using Visual Studio Code is also supported when using the `CMake Tools` extension.
 Simply select the `Windows x64 Visual Studio 17 2022` configure preset and build.
 
-_*Note: if you run into linking issues when building, make sure that you are using the latest
+_\*Note: if you run into linking issues when building, make sure that you are using the latest
 version of VS17_
 
 #### Compiling on Windows (Debug)
@@ -466,37 +466,43 @@ You should now have a `c3c` executable in `build-debug\Debug`.
 
 #### Compiling on Ubuntu 24.04 LTS
 
-1. Make sure you have a C compiler that handles C11 and a C++ compiler, such as GCC or Clang. Git
-   also needs to be installed.
-2. Install build dependencies:
+You will need a C compiler that handles C11 and a C++ compiler, such as GCC or Clang. Git also
+needs to be installed.
+
+1. Install the required build tools and dependencies:
 
     ```sh
-    sudo apt install \
-        clang \
-        cmake \
-        git \
-        liblld-18 \
-        liblld-dev \
-        libllvm18 \
-        libpolly-18-dev \
-        llvm \
-        llvm-dev \
-        llvm-runtime \
-        zlib1g \
-        zlib1g-dev
+    sudo apt install cmake git liblld-dev libpolly-18-dev llvm-dev
     ```
 
-    If you're using Ubuntu 25.04, also install `libpolly-20-dev`.
+    If you're using Ubuntu 25.04, install `libpolly-20-dev` instead of `libpolly-18-dev`.
 
-3. Clone the C3C github repository: `git clone --depth=1 https://github.com/c3lang/c3c.git`
-4. Enter the C3C directory `cd c3c`.
-5. Set up CMake build: `cmake -B=build --install-prefix=$HOME/.local`
-6. Build: `cmake --build build`
-7. Change directory to the build directory `cd build`
+2. Clone the C3C github repository:
 
-You should now have a `c3c` executable.
+    ```sh
+    git clone --depth=1 https://github.com/c3lang/c3c.git
+    ```
 
-You can try it out by running some sample code: `./c3c compile ../resources/examples/hash.c3`
+3. Enter the C3C directory and set up CMake build:
+
+    ```sh
+    cd c3c && cmake -B=build --install-prefix=$HOME/.local
+    ```
+
+4. Build the project: `cmake --build build`
+
+5. You should now have a `c3c` executable under `./build/c3c`. You can try it out by running some
+   sample code:
+
+   ```sh
+   ./build/c3c compile resources/examples/hash.c3
+   ```
+
+6. If you want to install `c3c` as a general command for your user profile:
+
+    ```sh
+    cmake --install build
+    ```
 
 #### Compiling on Void Linux
 
@@ -614,7 +620,7 @@ code: `./c3c compile ../resources/examples/hash.c3`
 6. Build: `cmake --build build`
 7. Change directory to the build directory `cd build`
 
-_*Note on compiling for Linux/Unix/MacOS: to be able to fetch vendor libraries, `libcurl` is needed.
+_\*Note on compiling for Linux/Unix/MacOS: to be able to fetch vendor libraries, `libcurl` is needed.
 The CMake script should detect it if it is available but functionality is non-essential
 and it is perfectly fine to use the compiler without it._
 
